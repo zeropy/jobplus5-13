@@ -1,0 +1,14 @@
+.*.swp
+.*.ipynb
+__pycache__
+.ipynb_checkpoints
+datasets/
+.floyd*
+*.log
+*.xlsx
+*.json
+*.ipynb
+*.csv
+*.zip
+__MACOSX
+.DS_Store
