@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock  %}</title>
+    {% block head_css %}
+      <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {% endblock  %}
+    {% block head_js %}{% endblock  %}
+  </head>
+  <body>
+    {% include "header.html" %}
+
+  </body>
+</html>

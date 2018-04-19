@@ -6,7 +6,10 @@ def register_extensions(app):
     pass
 
 def register_blueprints(app):
-    pass
+    from jobplus.handlers import admin
+    from jobplus.handlers import front
+    # app.register_blueprint(admin)
+    app.register_blueprint(front)
 
 def create_app(config):
     app = Flask(__name__)
