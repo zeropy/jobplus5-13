@@ -10,6 +10,9 @@
   </head>
   <body>
     {% include "header.html" %}
-
+    <div class="container">
+      {% block body %}{% endblock %}
+      {% block footer %}{% endblock %}      
+    </div>
   </body>
 </html>
