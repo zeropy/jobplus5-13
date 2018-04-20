@@ -8,12 +8,13 @@ class BaseConfig(object):
     data = json.loads(open(conf_file_path).read())
 
     SECRET_KEY = 'very secret key'
-    SERVER_NAME = data['server']
+    # SERVER_NAME = data['server']
 
 
 class DevelopmentConfig(BaseConfig):
-    DEBUG = BaseConfig.data['debug']
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://sogues:123@180.76.239.229:3306/{}?charset=utf8'.format(BaseConfig.data['database'])
+    DEBUG = 1
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost:3306/{}?charset=utf8'.format(BaseConfig.data['database'])
+    # SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost:3306/jobplus_legion?charset=utf8'
 
 
 class ProductionConfig(BaseConfig):
