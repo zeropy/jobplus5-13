@@ -1,10 +1,10 @@
-from falsk_wtf import FlaskForm
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, SelectField, SelectMultipleField, RadioField
 from wtforms import DateField, DateTimeField
 from wtforms.validators import Length, Email, EqualTo, Required, URL, NumberRange, DataRequired
-from wforms import ValidationError
+from wtforms import ValidationError
 from flask import flash
-from models import db, User
+from jobplus.models import db, User
 
 class Register(FlaskForm):
     # 个人注册表单
@@ -16,12 +16,21 @@ class Register(FlaskForm):
     agreement = BooleanField('我同意',validators=[DataRequired()])
     submit = SubmitField('注册')
 
+    def create_user(self):
+        name = self.username.data
+        email = self.email.data
+        password = self.password.data
+        user = User(name=name,email=email,password=password)
+        db.session.add(user)
+        db.session.commit()
+        return user
+
 class CompanyRegister(FlaskForm):
     # 企业注册
     company_name = StringField('企业名称',validators=[Required(),Length(2,64)])
     location = StringField('所在地', validators=[Required()])
     linkman = StringField('联系人',validators=[Required(),Length(2,30)])
-    phone = StringField('联系电话',validators=[Required(),Length(6,20))
+    phone = StringField('联系电话',validators=[Required(),Length(6,20)])
     email = StringField('邮箱', validators=[Required(),Email()])
     username = StringField('用户名',validators=[Required(),Length(6,24)])
     password = PasswordField('密码',validators=[Required(),Length(8,30)])
@@ -55,7 +64,7 @@ class Job(FlaskForm):
     location = StringField('工作地点',validators=[Required()])
     work_exp = SelectField('工作经验',validators=[Required()])
     education = SelectField('学历',validators=[Required()])
-    count = IntegerField('招聘人数',validators=[Required())
+    count = IntegerField('招聘人数',validators=[Required()])
     welfare = SelectMultipleField('员工福利', validators=[Required()])
     job_info = TextAreaField('职位信息',validators=[Required(),Length(50,1000)])
     categorys = SelectMultipleField('职能类别',validators=[Required()])
@@ -65,7 +74,7 @@ class Resume_info(FlaskForm):
     # 简历 基础信息部分
 
     real_name = StringField('姓名',validators=[Required()])
-    sex = RadioField('性别',validators=[Required())
+    sex = RadioField('性别',validators=[Required()])
     brithdate = DateField('出身日期',validators=[Required()])
     work_started = DateField('开始工作年份',validators=[Required()])
     phone = StringField('手机号码',validators=[Required()])
@@ -80,9 +89,9 @@ class Resume_purpose(FlaskForm):
     salay_range = SelectField('薪资范围',validators=[Required()])
     work_location = StringField('工作地点',validators=[Required()])
     job = StringField('职位',validators=[Required()])
-    evaluation = TextAreaField('自我评价',validators[Required(),Length(50,200)])
+    evaluation = TextAreaField('自我评价',validators=[Required(),Length(50,200)])
     available_time = SelectField('到岗时间',validators=[Required()])
-    type = RadioField('工作类型',validators=[Required())
+    type = RadioField('工作类型',validators=[Required()])
     submit = SubmitField('保存')
 
 class Resume_experiment(FlaskForm):
@@ -96,7 +105,7 @@ class Resume_experiment(FlaskForm):
     company_sized = SelectField('公司规模',validators=[Required()])
     compamy_type = SelectField('公司性质')
     description = TextAreaField('工作描述',validators=[Required(),Length(50,500)])
-    evaluation = TextAreaField('自我评价',validators[Required(),Length(50,200)])
+    evaluation = TextAreaField('自我评价',validators=[Required(),Length(50,200)])
     submit = SubmitField('保存')
 
 
@@ -144,7 +153,7 @@ class Companyinfo(FlaskForm):
 class Userinfo(FlaskForm):
     # 个人信息
     real_name = StringField('姓名',validators=[Required()])
-    sex = RadioField('性别',validators=[Required())
+    sex = RadioField('性别',validators=[Required()])
     brithdate = DateField('出身日期',validators=[Required()])
     work_started = DateField('开始工作年份',validators=[Required()])
     phone = StringField('手机号码',validators=[Required()])

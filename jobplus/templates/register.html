@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_form %}
+
+{% block body %}
+  <div class="row">
+    {{ render_form(form,url_for('admin.register')) }}
+  </div>
+{% endblock  %}
